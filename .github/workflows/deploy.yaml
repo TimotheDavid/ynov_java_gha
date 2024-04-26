@@ -19,6 +19,8 @@ jobs:
         working-directory: .
       - name: show package
         run: "ls -la target"
+      - name: show workspace
+        run: "echo ${{ github.workspace }}"
       - name: Azure Webapp
         uses: Azure/webapps-deploy@v3
         with:
