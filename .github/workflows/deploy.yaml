@@ -17,6 +17,8 @@ jobs:
       - name: build with maven
         run: mvn -B package --file pom.xml
         working-directory: .
+      - name: show package
+        run: "ls -la"
       - name: Azure Webapp
         uses: Azure/webapps-deploy@v3
         with:
