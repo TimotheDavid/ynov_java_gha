@@ -1,0 +1,23 @@
+name: JAVA CI SPRING BOOT
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: SETUP JDK 17
+        uses: actions/setups-java@v3
+        with:
+          java-version: 17
+      - name: build with maven
+        run: mvn -B app --file pom.xml
+        working-directory: .
+      - name: Azure Webapp
+        uses: Azure/webapps-deploy@v3
+        with:
+          app-name: ynov-java
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: target/*.jar
